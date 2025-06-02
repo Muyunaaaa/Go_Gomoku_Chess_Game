@@ -1,0 +1,3 @@
+G:/myFTP/personal/FYY_personal/program/project/c++/ChessGame/cmake-build-debug-mingw-bundled/CMakeFiles/Easyx.dir
+G:/myFTP/personal/FYY_personal/program/project/c++/ChessGame/cmake-build-debug-mingw-bundled/CMakeFiles/edit_cache.dir
+G:/myFTP/personal/FYY_personal/program/project/c++/ChessGame/cmake-build-debug-mingw-bundled/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,153 @@
+//
+// Created by 冯于洋 on 25-5-16.
+#include "Player.h"
+
+#include <iostream>
+#include <easyx.h>
+#include <memory>
+#include <math.h>
+#include <conio.h>
+#include <iomanip>
+#include <string>
+#include <vector>
+
+#include "Chess.h"
+#include "draw.h"
+#include "game.h"
+#include "GameStateStack.h"
+#include "Go.h"
+#include "Gomoku.h"
+#include "graphics.h"
+
+std::vector<Chess>chesses;
+std::vector<std::vector<Chess>>chessesBuff;
+extern GameStateStack _stack;
+int chesscolor = BLACK;
+bool Player::two_player_put_Chess(MOUSEMSG m) {
+    if (m.uMsg == WM_LBUTTONDOWN) {
+        if (peek_DrawBack(m)) {
+            if (!chessesBuff.empty()&&chessesBuff.size()>1) {
+                chessesBuff.pop_back();
+                chesses = chessesBuff.back();
+                chesscolor = (chesscolor == BLACK) ? WHITE : BLACK;
+                BeginBatchDraw();
+                cleardevice();
+                draw_Board();
+                draw_Chess(chesses);
+                //_getch();
+                std::cout<<chesses.size()<<std::endl;
+                EndBatchDraw();
+            }
+        }
+        else if (peek_Restart(m)) {
+            chesses.clear();
+            chessesBuff.clear();
+            BeginBatchDraw();
+            cleardevice();
+            draw_Board();
+            draw_Chess(chesses);
+            std::cout<<chesses.size()<<std::endl;
+            EndBatchDraw();
+            chesscolor = BLACK;
+        }
+        else if (peek_Concede(m)) {
+            cleardevice();
+            chesscolor = (chesscolor == BLACK) ? WHITE : BLACK;
+            return true;
+        }
+        else {
+            int gx, gy;
+            std::cout<<"gx:"<<gx<<"gy:"<<gy<<std::endl;
+            if (get_Grid_Pos(m.x, m.y, gx, gy)) {
+                std::cout<<"gx:"<<gx<<"gy:"<<gy<<std::endl;
+                Chess newchess(static_cast<int>(gx), static_cast<int>(gy), chesscolor);
+                if (!newchess.is_Chess_Exist(chesses)) {
+                    chesses.push_back(newchess);
+                    if (_stack.peekState() == "GOMOKU") {
+                        BeginBatchDraw();
+                        int result = gomoku_CheckWin(chesses, newchess);
+                        cleardevice();
+                        draw_Board();
+                        draw_Chess(chesses);
+                        EndBatchDraw();
+                        if (result != NORMAL_WIN) {
+                            return true; // 游戏结束，胜负已分
+                        }
+                    }
+                    else if (_stack.peekState() == "GO") {
+                        BeginBatchDraw();
+                        execute_Go_Rules();
+                        BeginBatchDraw();
+                        draw_Board();
+                        draw_Chess(chesses);
+                        int result = go_CheckWin(chesses, newchess);
+                        if (result != NORMAL_WIN) {
+                            return true;
+                        }
+                        EndBatchDraw();
+                    }
+                    // 切换玩家
+                    chesscolor = (chesscolor == BLACK) ? WHITE : BLACK;
+                    chessesBuff.push_back(chesses);
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool Player::computer_and_player_put_Chess(MOUSEMSG m) {
+    if (m.uMsg == WM_LBUTTONDOWN) {
+        if (peek_Restart(m)) {
+            chesses.clear();
+            chessesBuff.clear();
+            chesscolor = BLACK;
+            BeginBatchDraw();
+            cleardevice();
+            draw_Board();
+            draw_Chess(chesses);
+            EndBatchDraw();
+            return false;
+        }
+        else if (peek_Concede(m)) {
+            cleardevice();
+            chesscolor = (chesscolor == BLACK) ? WHITE : BLACK;
+            return true; // 游戏结束
+        }
+        else {
+            int gx, gy;
+            if (get_Grid_Pos(m.x, m.y, gx, gy)) {
+                Chess newchess(gx, gy, chesscolor);
+                if (!newchess.is_Chess_Exist(chesses)) {
+                    chesses.push_back(newchess);
+                    if (_stack.peekState() == "GOMOKU") {
+                        BeginBatchDraw();
+                        int result = gomoku_CheckWin(chesses, newchess);
+                        cleardevice();
+                        draw_Board();
+                        draw_Chess(chesses);
+                        EndBatchDraw();
+                        if (result != NORMAL_WIN)
+                            return true;
+                    } else if (_stack.peekState() == "GO") {
+                        BeginBatchDraw();
+                        execute_Go_Rules();
+                        cleardevice();
+                        draw_Board();
+                        draw_Chess(chesses);
+                        EndBatchDraw();
+                        int result = go_CheckWin(chesses, newchess);
+                        if (result != NORMAL_WIN)
+                            return true;
+                    }
+                    chesscolor = (chesscolor == BLACK) ? WHITE : BLACK;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+Player::~Player() {
+}
+

@@ -1,0 +1,12 @@
+# ninja log v6
+6	1787	7705524722995172	CMakeFiles/Easyx.dir/src/AI.cpp.obj	10554e730b456aff
+40	952	7705116117904608	CMakeFiles/Easyx.dir/src/GameStateStack.cpp.obj	e840c24a5b6ff587
+634	3352	7705521838731701	CMakeFiles/Easyx.dir/src/game.cpp.obj	f89585838f35590a
+68	1736	7705116118193641	CMakeFiles/Easyx.dir/src/Gomoku.cpp.obj	4830fb67cbbbfa7
+126	1942	7705116118771711	CMakeFiles/Easyx.dir/src/draw.cpp.obj	a53daa374b7b997c
+25	1953	7705116117765076	CMakeFiles/Easyx.dir/src/Chess.cpp.obj	72bb9d8fcce53455
+7	1622	7705141650099648	CMakeFiles/Easyx.dir/src/main.cpp.obj	dd37c158acf6c95a
+104	2205	7705116118552445	CMakeFiles/Easyx.dir/src/UI.cpp.obj	e8aecdea955870e1
+4	1559	7705466572055357	CMakeFiles/Easyx.dir/src/Player.cpp.obj	a9938ec836e211ef
+53	2270	7705116118044142	CMakeFiles/Easyx.dir/src/Go.cpp.obj	25364704bb175cfa
+1788	1931	7705524740818451	G:/myFTP/personal/FYY_personal/program/@DevCode/c++/Techique_operation/Techique_operation_final/driver/.runtime/Easyx.exe	4fe1b4bb4db68a31

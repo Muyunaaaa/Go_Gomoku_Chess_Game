@@ -1,0 +1,3 @@
+G:/myFTP/personal/FYY_personal/program/@DevCode/c++/Techique_operation/Techique_operation_final/driver/cmake-build-debug-mingw-bundled-1/CMakeFiles/Easyx.dir
+G:/myFTP/personal/FYY_personal/program/@DevCode/c++/Techique_operation/Techique_operation_final/driver/cmake-build-debug-mingw-bundled-1/CMakeFiles/edit_cache.dir
+G:/myFTP/personal/FYY_personal/program/@DevCode/c++/Techique_operation/Techique_operation_final/driver/cmake-build-debug-mingw-bundled-1/CMakeFiles/rebuild_cache.dir

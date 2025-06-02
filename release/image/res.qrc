@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>2025-03-24_23.16.17.png</file>
+    </qresource>
+    <qresource prefix="/new/init_graph">
+        <file>assets_task_01jwn34jw2fg1t4hvge8vbrd9k_1748759683_img_1.webp</file>
+    </qresource>
+</RCC>
