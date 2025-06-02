@@ -44,7 +44,7 @@
    - 怀疑点：`AI::put_Chess()` 中未落子时未阻止回合切换
 
      ```c++
-     cpp复制编辑if (!newChess.is_Chess_Exist(chesses)) {
+     if (!newChess.is_Chess_Exist(chesses)) {
          chesses.push_back(newChess);
          ...
          return result != NORMAL_WIN;
